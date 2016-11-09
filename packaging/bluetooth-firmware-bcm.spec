@@ -1,6 +1,6 @@
 Name:      bluetooth-firmware-bcm
 Summary:    firmware and tools for bluetooth
-Version:    0.1.3
+Version:    0.2.0
 Release:    1
 Group:      Hardware Support/Handset
 License:    Apache-2.0
@@ -94,6 +94,7 @@ ln -s %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh %{_prefix}/etc/bluetooth/bt
 %{_bindir}/brcm_patchram_plus
 %{_bindir}/setbd
 %{_prefix}/etc/bluetooth/BCM4354_003.001.012.0353.0745_Samsung_Artik_ORC.hcd
+%{_prefix}/etc/bluetooth/BCM4345C0_003.001.025.0111.0205.hcd
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh

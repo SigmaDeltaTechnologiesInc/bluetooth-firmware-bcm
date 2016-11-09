@@ -36,6 +36,13 @@ check_hw_dt()
 			BCM_TOOL=/usr/bin/brcm_patchram_plus
 			BCM_FIRMWARE=BCM4354_003.001.012.0353.0745_Samsung_Artik_ORC.hcd
 			;;
+
+		"artik710")
+			BT_UART_DEVICE=/dev/ttySAC1
+			BCM_TOOL=/usr/bin/brcm_patchram_plus
+			BCM_FIRMWARE=BCM4345C0_003.001.025.0111.0205.hcd
+			;;
+
 	esac
 }
 
@@ -86,7 +93,12 @@ else
 	do
 		echo "******* Bcmtool download attempt $c ********"
 
-	$BCM_TOOL $BT_UART_DEVICE --patchram /usr/etc/bluetooth/$BCM_FIRMWARE --no2bytes --baudrate $UART_SPEED --use_baudrate_for_download $BT_UART_DEVICE --bd_addr ${BD_ADDR} > /dev/null 2>&1 &
+		if [ $BD_ADDR ];then
+			$BCM_TOOL $BT_UART_DEVICE --patchram /usr/etc/bluetooth/$BCM_FIRMWARE --no2bytes --baudrate $UART_SPEED --use_baudrate_for_download $BT_UART_DEVICE --bd_addr ${BD_ADDR} > /dev/null 2>&1 &
+		else
+			$BCM_TOOL $BT_UART_DEVICE --patchram /usr/etc/bluetooth/$BCM_FIRMWARE --no2bytes --baudrate $UART_SPEED --use_baudrate_for_download $BT_UART_DEVICE --enable_lpm > /dev/null 2>&1 &
+		fi
+
 		bcmtool_pid=$!
 		#Check next timeout seconds for bcmtool success
 		for (( i=1; i<=$TIMEOUT; i++))
