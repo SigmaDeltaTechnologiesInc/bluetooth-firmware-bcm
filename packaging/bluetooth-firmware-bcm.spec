@@ -37,6 +37,8 @@ bcm firmware and tools for artik
 %setup -q
 
 %build
+export CFLAGS=$( echo $CFLAGS | sed -e "s/-flto//g" )
+export CXXFLAGS=$( echo $CXXFLAGS | sed -e "s/-flto//g" )
 cmake ./ -DCMAKE_INSTALL_PREFIX=%{_prefix} -DPLUGIN_INSTALL_PREFIX=%{_prefix}
 make %{?jobs:-j%jobs}
 
