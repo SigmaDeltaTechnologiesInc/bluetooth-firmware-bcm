@@ -33,6 +33,14 @@ Provides:   bluetooth-scripts
 %description artik
 bcm firmware and tools for artik
 
+%package exynos7270
+Summary:    bcm firmware and tools for exynos7270
+Group:      Hardware Support/Handset
+Provides:   bluetooth-scripts
+
+%description exynos7270
+BT firmware and tools for exynos7270
+
 %prep
 %setup -q
 
@@ -97,6 +105,24 @@ ln -s %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh %{_prefix}/etc/bluetooth/bt
 %{_prefix}/etc/bluetooth/BCM4345C0_003.001.025.0111.0205.hcd
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
+/usr/share/license/%{name}
+%{_libdir}/systemd/system/bluetooth-hciattach@.service
+%{_libdir}/systemd/system/bluetooth-hci-device.service
+%manifest %{name}.manifest
+
+%post exynos7270
+rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
+ln -s %{_prefix}/etc/bluetooth/bt-dev-start-exynos7270.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
+rm -rf /lib/firmware/43012B0.hex
+ln -s /lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex /lib/firmware/43012B0.hex
+
+%files exynos7270
+%defattr(-,root,root,-)
+%{_bindir}/setbd
+/lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-exynos7270.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
 /usr/share/license/%{name}
 %{_libdir}/systemd/system/bluetooth-hciattach@.service
