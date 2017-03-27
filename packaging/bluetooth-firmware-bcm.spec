@@ -53,14 +53,12 @@ rm -rf %{buildroot}
 
 %make_install
 
-mkdir -p %{buildroot}/usr/share/license
-cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
-cat %{_builddir}/%{name}-%{version}/LICENSE.Broadcom >> %{buildroot}/usr/share/license/%{name}
-
 install -D -m 0644 %SOURCE1 %{buildroot}%{_libdir}/systemd/system/bluetooth-hciattach@.service
 install -D -m 0644 %SOURCE2 %{buildroot}%{_libdir}/systemd/system/bluetooth-hci-device.service
 
 %files
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
 %defattr(-,root,root,-)
 #%{_bindir}/bcmtool_4330b1
 %exclude %{_bindir}/bcmtool_4343w
@@ -80,6 +78,8 @@ rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
 ln -s %{_prefix}/etc/bluetooth/bt-dev-start-exynos3250.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
 
 %files exynos3250
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
 %defattr(-,root,root,-)
 %{_bindir}/bcmtool_4343w
 %{_bindir}/setbd
@@ -88,7 +88,6 @@ ln -s %{_prefix}/etc/bluetooth/bt-dev-start-exynos3250.sh %{_prefix}/etc/bluetoo
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-exynos3250.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
-/usr/share/license/%{name}
 %{_libdir}/systemd/system/bluetooth-hciattach@.service
 %{_libdir}/systemd/system/bluetooth-hci-device.service
 %manifest %{name}.manifest
@@ -98,6 +97,8 @@ rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
 ln -s %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
 
 %files artik
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
 %defattr(644,root,root,-)
 %{_bindir}/brcm_patchram_plus
 %{_bindir}/setbd
@@ -106,7 +107,6 @@ ln -s %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh %{_prefix}/etc/bluetooth/bt
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-artik.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
-/usr/share/license/%{name}
 %{_libdir}/systemd/system/bluetooth-hciattach@.service
 %{_libdir}/systemd/system/bluetooth-hci-device.service
 %manifest %{name}.manifest
@@ -118,13 +118,14 @@ rm -rf /lib/firmware/43012B0.hex
 ln -s /lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex /lib/firmware/43012B0.hex
 
 %files exynos7270
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
 %defattr(-,root,root,-)
 %{_bindir}/setbd
 /lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-exynos7270.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
-/usr/share/license/%{name}
 %{_libdir}/systemd/system/bluetooth-hciattach@.service
 %{_libdir}/systemd/system/bluetooth-hci-device.service
 %manifest %{name}.manifest
