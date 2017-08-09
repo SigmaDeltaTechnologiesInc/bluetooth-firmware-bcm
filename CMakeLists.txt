@@ -7,7 +7,8 @@ FOREACH(flag ${package_CFLAGS})
 	SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} ${flag}")
 ENDFOREACH(flag)
 
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -fPIC -Wall -Werror")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -fPIC -Wall -Werror -fPIE")
+SET(CMAKE_EXE_LINKER_FLAGS "-Wl,--as-needed -pie")
 
 ADD_SUBDIRECTORY(set-address)
 ADD_SUBDIRECTORY(tools)
