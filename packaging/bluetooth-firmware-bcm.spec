@@ -41,6 +41,14 @@ Provides:   bluetooth-scripts
 %description exynos7270
 BT firmware and tools for exynos7270
 
+%package rpi3
+Summary:    bcm firmware and tools for rpi3
+Group:      Hardware Support/Handset
+Provides:   bluetooth-scripts
+
+%description rpi3
+BT firmware and tools for rpi3
+
 %prep
 %setup -q
 
@@ -128,4 +136,17 @@ ln -s /lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex /lib/firmware/
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-set-addr.sh
 %{_libdir}/systemd/system/bluetooth-hciattach@.service
 %{_libdir}/systemd/system/bluetooth-hci-device.service
+%manifest %{name}.manifest
+
+%post rpi3
+rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
+ln -s %{_prefix}/etc/bluetooth/bt-dev-start-rpi3.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
+
+%files rpi3
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
+%defattr(-,root,root,-)
+%{_prefix}/etc/bluetooth/BCM43430A1.hcd
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-rpi3.sh
 %manifest %{name}.manifest
