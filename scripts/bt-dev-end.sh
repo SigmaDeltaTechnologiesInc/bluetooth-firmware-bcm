@@ -1,5 +1,6 @@
 #!/bin/sh
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
+PGREP=/usr/bin/pgrep
 
 #
 # Script for stopping Broadcom UART Bluetooth stack
@@ -14,11 +15,13 @@ if [ $REVISION_NUM == "0006" ]; then
 	rmmod bt_drv.ko
 	rmmod st_drv.ko
 	sleep 1
-	killall uim_rfkill
+	UIM_RFKILL_PID=$($PGREP uim_rfkill)
+	kill $UIM_RFKILL_PID
 	exit 0
 fi
 
-killall hciattach
+HCIATTACH_PID=$($PGREP hciattach)
+kill $HCIATTACH_PID
 
 # Turn off Bluetooth Chip
 /usr/sbin/rfkill block bluetooth
