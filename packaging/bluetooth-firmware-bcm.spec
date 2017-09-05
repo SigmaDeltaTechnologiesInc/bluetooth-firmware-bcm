@@ -140,13 +140,15 @@ ln -s /lib/firmware/bcm43012/BCM43012B0_002.001.021.0081.0087.hex /lib/firmware/
 
 %post rpi3
 rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
+rm -rf %{_prefix}/etc/bluetooth/bt-dev-end.sh
 ln -s %{_prefix}/etc/bluetooth/bt-dev-start-rpi3.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
+ln -s %{_prefix}/etc/bluetooth/bt-dev-end-rpi3.sh %{_prefix}/etc/bluetooth/bt-dev-end.sh
 
 %files rpi3
 %manifest %{name}.manifest
 %license LICENSE.APLv2 LICENSE.Broadcom
 %defattr(-,root,root,-)
 %{_prefix}/etc/bluetooth/BCM43430A1.hcd
-%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end.sh
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end-rpi3.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-rpi3.sh
 %manifest %{name}.manifest
