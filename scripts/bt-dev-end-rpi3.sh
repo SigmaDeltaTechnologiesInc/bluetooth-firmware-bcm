@@ -20,12 +20,6 @@ if [ $REVISION_NUM == "0006" ]; then
 	exit 0
 fi
 
-HCIATTACH_PID=$($PGREP hciattach)
-kill $HCIATTACH_PID
-
-# Turn off Bluetooth Chip
-/usr/sbin/rfkill block bluetooth
-
 #if [ -e /sys/class/gpio/gpio17/value ]
 #then
 #	# Reset BT chip
