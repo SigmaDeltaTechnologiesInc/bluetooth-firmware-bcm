@@ -78,9 +78,9 @@ fi
 
 echo "Registering Bluetooth device"
 
-$BCM_TOOL $BT_UART_DEVICE -TYPE=${BCM_CHIP_NAME} $ENABLE_BCMTOOL_DEBUG \
+$BCM_TOOL $BT_UART_DEVICE -TYPE=${BCM_CHIP_NAME} \
 	-FILE=/usr/etc/bluetooth/$BCM_FIRMWARE -BAUD=$UART_SPEED \
-	-ADDR=$BT_ADDR >$BCM_TOOL_DBG_LOG  2>&1 &
+	-ADDR=$BT_ADDR 2>&1 &
 bcmtool_pid=$!
 
 #Check next timeout seconds for bcmtool success
