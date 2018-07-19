@@ -3,7 +3,7 @@ Summary:    firmware and tools for bluetooth
 Version:    0.2.0
 Release:    1
 Group:      Hardware Support/Handset
-License:    Apache-2.0
+License:    Apache-2.0 and Broadcom
 # NOTE: Source name does not match package name.  This should be
 # resolved in the future, by I don't have that power. - Ryan Ware
 Source0:    %{name}-%{version}.tar.gz
