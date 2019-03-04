@@ -1,6 +1,6 @@
 Name:      bluetooth-firmware-bcm
 Summary:    firmware and tools for bluetooth
-Version:    0.2.0
+Version:    0.2.1
 Release:    1
 Group:      Hardware Support/Handset
 License:    Apache-2.0
@@ -48,6 +48,14 @@ Provides:   bluetooth-scripts
 
 %description rpi3
 BT firmware and tools for rpi3
+
+%package sdta7d
+Summary:    bcm firmware and tools for sdta7d
+Group:      Hardware Support/Handset
+Provides:   bluetooth-scripts
+
+%description sdta7d
+BT firmware and tools for sdta7d
 
 %prep
 %setup -q
@@ -152,3 +160,19 @@ ln -s %{_prefix}/etc/bluetooth/bt-dev-end-rpi3.sh %{_prefix}/etc/bluetooth/bt-de
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end-rpi3.sh
 %attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-rpi3.sh
 %manifest %{name}.manifest
+
+%post sdta7d
+rm -rf %{_prefix}/etc/bluetooth/bt-dev-start.sh
+rm -rf %{_prefix}/etc/bluetooth/bt-dev-end.sh
+ln -s %{_prefix}/etc/bluetooth/bt-dev-start-sdta7d.sh %{_prefix}/etc/bluetooth/bt-dev-start.sh
+ln -s %{_prefix}/etc/bluetooth/bt-dev-end-sdta7d.sh %{_prefix}/etc/bluetooth/bt-dev-end.sh
+
+%files sdta7d
+%manifest %{name}.manifest
+%license LICENSE.APLv2 LICENSE.Broadcom
+%defattr(-,root,root,-)
+%{_prefix}/etc/bluetooth/BCM4335C0.hcd
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-end-sdta7d.sh
+%attr(755,-,-) %{_prefix}/etc/bluetooth/bt-dev-start-sdta7d.sh
+%manifest %{name}.manifest
+
